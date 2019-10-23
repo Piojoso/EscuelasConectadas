@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTiposTable extends Migration
+class CreateLocalitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTiposTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos', function ($table) {
-            
-            $table->Increments('id');
-
-            $table->string('nombre', 50);
+        Schema::create('localities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->UnsignedInteger('department_id');
             $table->timestamps();
+
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateTiposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos');
+        Schema::dropIfExists('localities');
     }
 }
