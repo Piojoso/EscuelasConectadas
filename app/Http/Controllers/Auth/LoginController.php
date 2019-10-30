@@ -31,10 +31,12 @@ class LoginController extends Controller
      * Allow auth with UserName
      *
      * @var string
+     *
+     * public function username(){
+     *     return 'username';
+     * }
+     * NOT WORK!!
      */
-    public function username(){
-        return 'username';
-    }
 
     /**
      * Create a new controller instance.
