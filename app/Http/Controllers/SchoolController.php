@@ -35,14 +35,27 @@ class SchoolController extends Controller
      */
     public function store(Request $data)
     {
-        echo ('Hello World');
-        var_dump($data);
-        /*
-        return School::create([
+        foreach(School::all()as $school) {
+            if( ($school->cue == $data['cue']) && ($school->level_id == $data['level']) ){
+                return "Esa escuela ya existe";
+            }
+            else if($school->email == $data['email']){
+                return "Ya existe otra escuela con ese correo.";
+            }
+        }
+
+        if($data['bilingual'] == null){
+            $bilingual = false;
+        }
+        else if($data['bilingual'] == "on"){
+            $bilingual = true;
+        }
+
+        School::create([
             'name' => $data['name'],
             'cue' => $data['cue'],
             'email' => $data['email'],
-            'bilingual' => $data['bilingual'],
+            'bilingual' => $bilingual,
             'avg_number_students' => $data['avgStudents'],
             'director' => $data['director'],
             'address' => $data['address'],
@@ -58,7 +71,9 @@ class SchoolController extends Controller
             'category_id' => $data['category'],
             'locality_id' => $data['locality'],
             'responsable_id' => $data['responsable']
-        ]);*/
+        ]);
+
+        return view('Schools/school');
     }
 
     /**
@@ -69,7 +84,7 @@ class SchoolController extends Controller
      */
     public function show(School $school)
     {
-        return view('Schools/show', $school);
+        return view('Schools/show', ['school' => $school]);
     }
 
     /**
@@ -80,7 +95,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        return view('School/show', $school);
+        return view('Schools/show', ['school' => $school]);
     }
 
     /**
@@ -92,11 +107,36 @@ class SchoolController extends Controller
      */
     public function update(Request $data, School $school)
     {
-        $school->name = $data['name'];
-        $school->cue = $data['cue'];
+        if($data['bilingual'] == null){
+            $bilingual = false;
+        }
+        else if($data['bilingual'] == "on"){
+            $bilingual = true;
+        }
 
+        $school->update([
+            'name' => $data['name'],
+            'cue' => $data['cue'],
+            'email' => $data['email'],
+            'bilingual' => $bilingual,
+            'avg_number_students' => $data['avgStudents'],
+            'director' => $data['director'],
+            'address' => $data['address'],
+            'internal_phone' => $data['internal_phone'],
+            'phone' => $data['phone'],
+            'orientation' => $data['orientation'],
+            'type_id' => $data['type'],
+            'sector_id' => $data['sector'],
+            'level_id' => $data['level'],
+            'area_id' => $data['area'],
+            'typeJourney_id' => $data['typeJourney'],
+            'typeHighSchool_id' => $data['typeHighSchool'],
+            'category_id' => $data['category'],
+            'locality_id' => $data['locality'],
+            'responsable_id' => $data['responsable']]
+        );
 
-        $school->save();
+        return view('Schools/school');
     }
 
     /**
@@ -108,5 +148,7 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         $school->delete();
+
+        return view('Schools/school');
     }
 }
