@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
             AreasTableSeeder::class,
             CategoriesTableSeeder::class,
             Type_JourneysTableSeeder::class,
-            Type_High_SchoolsTableSeeder::class
+            Type_High_SchoolsTableSeeder::class,
+            ProvincesTableSeeder::class,
+            DepartmentsTableSeeder::class,
+            LocalitiesTableSeeder::class,
         ]);
     }
 }
