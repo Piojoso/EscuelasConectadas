@@ -36,7 +36,7 @@ class CreateSchoolsTable extends Migration
             $table->UnsignedInteger('typeHighSchool_id');
             $table->UnsignedInteger('category_id');
             $table->UnsignedInteger('locality_id');
-            $table->UnsignedInteger('responsable_id');
+            $table->UnsignedInteger('responsable_id')->nullable();
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('types');
