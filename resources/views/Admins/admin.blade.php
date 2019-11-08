@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -9,11 +9,11 @@
                         <div class="navbar navbar-expand-md p-0">
                             <div class="container">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item">{{ __('Schools') }}</li>
+                                    <li class="nav-item">{{ __('Admins') }}</li>
                                 </ul>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('schools.create') }}">
+                                        <a href="{{ route('admins.create') }}" class="nav-link">
                                             {{ __('Add') }}
                                         </a>
                                     </li>
@@ -31,32 +31,24 @@
                                                 <th> {{ __('ID') }} </th>
                                             @endauth
                                             <th>{{ __('Name')  }}</th>
-                                            <th>{{ __('CUE') }}</th>
-                                            <th>{{ __('Address') }}</th>
-                                            <th>{{ __('Level') }}</th>
-                                            <th>{{ __('Locality') }}</th>
-                                            <th>{{ __('Responsable Name') }}</th>
+                                            <th>{{ __('First Name') }}</th>
+                                            <th>{{ __('Last Name') }}</th>
+                                            <th>{{ __('Email') }}</th>
                                             <th>{{ __('Detail') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (App\School::all() as $school)
+                                        @foreach (App\User::where('rol', 'Administrador')->cursor() as $admin)
                                         <tr>
                                             @auth
-                                                <td>{{ $school->id }}</td>
+                                                <td>{{ $admin->id }}</td>
                                             @endauth
-                                            <td>{{ $school->name }}</td>
-                                            <td>{{ $school->cue }}</td>
-                                            <td>{{ $school->address }}</td>
-                                            <td>{{ $school->level->name }}</td>
-                                            <td>{{ $school->locality->name }}</td>
-                                            @if ($school->responsable != null)
-                                                <td>{{ $school->responsable->first_name }}</td>
-                                            @else
-                                                <td></td>
-                                            @endif
+                                            <td>{{ $admin->name }}</td>
+                                            <td>{{ $admin->first_name }}</td>
+                                            <td>{{ $admin->last_name }}</td>
+                                            <td>{{ $admin->email }}</td>
                                             <td>
-                                                <a href="{{ route('schools.show', ['school' => $school->id]) }}">
+                                                <a href="{{ route('admins.show', ['admin' => $admin->id]) }}">
                                                     <i class="fas fa-angle-double-right fa-lg"></i>
                                                 </a>
                                             </td>
@@ -67,9 +59,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
-

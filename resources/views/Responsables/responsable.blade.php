@@ -9,11 +9,11 @@
                         <div class="navbar navbar-expand-md p-0">
                             <div class="container">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item">{{ __('Admin') }}</li>
+                                    <li class="nav-item">{{ __('Responsable') }}</li>
                                 </ul>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a href="{{ route('admin.create') }}" class="nav-link">
+                                        <a href="{{ route('responsable.create') }}" class="nav-link">
                                             {{ __('Add') }}
                                         </a>
                                     </li>
@@ -38,17 +38,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (App\User::where('rol', 'Administrador')->cursor() as $admin)
+                                        @foreach (App\User::where('rol', 'ResponsableInscripto')->cursor() as $responsable)
                                         <tr>
                                             @auth
-                                                <td>{{ $admin->id }}</td>
+                                                <td>{{ $responsable->id }}</td>
                                             @endauth
-                                            <td>{{ $admin->name }}</td>
-                                            <td>{{ $admin->first_name }}</td>
-                                            <td>{{ $admin->last_name }}</td>
-                                            <td>{{ $admin->email }}</td>
+                                            <td>{{ $responsable->name }}</td>
+                                            <td>{{ $responsable->first_name }}</td>
+                                            <td>{{ $responsable->last_name }}</td>
+                                            <td>{{ $responsable->email }}</td>
                                             <td>
-                                                <a href="{{ route('admin.show', ['admin' => $admin->id]) }}">
+                                                <a href="{{ route('responsable.show', ['responsable' => $responsable->id]) }}">
                                                     <i class="fas fa-angle-double-right fa-lg"></i>
                                                 </a>
                                             </td>

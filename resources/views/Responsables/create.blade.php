@@ -6,22 +6,21 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Admin') . " " . $admin->id}}
+                        {{ __('Add new Responsable')}}
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-md-10">
 
-                                <form action="{{ route('admin.update', $admin->id) }}" method="POST">
+                                <form action="{{ route('responsable.store') }}" method="POST">
                                     @csrf
-                                    @method('PUT')
 
                                     <!-- Name -->
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $admin->name }}" required autocomplete="name" autofocus>
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -36,7 +35,7 @@
                                         <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $admin->first_name }}" required autocomplete="first_name">
+                                            <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name">
 
                                             @error('first_name')
                                                 <span class="invalid-feedback" role="alert">
@@ -51,7 +50,7 @@
                                         <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $admin->last_name }}" required autocomplete="last_name">
+                                            <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
 
                                             @error('last_name')
                                                 <span class="invalid-feedback" role="alert">
@@ -66,7 +65,7 @@
                                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $admin->email }}" required autocomplete="email">
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -76,38 +75,47 @@
                                         </div>
                                     </div>
 
-                                    <!-- Update - Cancel -->
+                                    <!-- Password -->
                                     <div class="form-group row">
-                                        <!-- Update -->
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- Repeat Password -->
+                                    <div class="form-group row">
+                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        </div>
+                                    </div>
+
+                                    <!-- Add - Cancel -->
+                                    <div class="form-group row mb-0">
+                                        <!-- Add -->
                                         <div class="col-md-2"></div>
                                         <div class="col-md-4">
                                             <button type="submit" class="btn btn-success btn-block">
-                                                {{ __('Update') }}
+                                                {{ __('Add') }}
                                             </button>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('admin.index') }}" class="btn btn-dark btn-block">
+                                            <a href="{{ route('responsable.index') }}" class="btn btn-danger btn-block">
                                                 {{ __('Cancel') }}
                                             </a>
                                         </div>
                                     </div>
                                 </form>
 
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-
-                                        <form action="{{ route('admin.destroy', $admin->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit" class="btn btn-danger btn-block">
-                                                {{ __('Remove') }}
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -116,3 +124,4 @@
         </div>
     </div>
 @endsection
+

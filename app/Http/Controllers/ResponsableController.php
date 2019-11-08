@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\School;
 
-class AdminController extends Controller
+class ResponsableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('Admins/admin');
+        return view('Responsables/responsable');
     }
 
     /**
@@ -25,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('Admins/create');
+        return view('Responsables/create');
     }
 
     /**
@@ -41,64 +42,70 @@ class AdminController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'rol' => 'Administrador',
-            'password' => Hash::make($data['password'])
+            'rol' => 'ResponsableInscripto',
+            'password' => Hash::make($data['password']),
         ]);
 
-        return view('Admins/admin');
+        return view('Responsables/responsable');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $admin
+     * @param  \App\User  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function show(User $admin)
+    public function show(User $responsable)
     {
-        return view('Admins/show', ['admin' => $admin]);
+        return view('Responsables/show', ['responsable' => $responsable]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $admin
+     * @param  \App\User  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $admin)
+    public function edit(User $responsable)
     {
-        return view('Admins/show', ['admin' => $admin]);
+        return view('Responsables/show', ['responsable' => $responsable]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $data
-     * @param  \App\User  $admin
+     * @param  \App\User  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $data, User $admin)
+    public function update(Request $data, User $responsable)
     {
-        $admin->update([
+        $responsable->update([
             'name' => $data['name'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
         ]);
 
-        return view('Admins/admin');
+        return view('Responsables/responsable');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $admin
+     * @param  \App\User  $responsable
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $admin)
+    public function destroy(User $responsable)
     {
-        $admin->delete();
+        $school = School::where('responsable_id', $responsable->id);
 
-        return view('Admins/admin');
+        $school->update([
+            'responsable_id' => null
+        ]);
+
+        $responsable->delete();
+
+        return view('Responsables/responsable');
     }
 }
