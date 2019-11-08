@@ -392,7 +392,7 @@
                                         <form action="{{ route('schools.destroy', $school->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" href="" class="btn btn-danger btn-block">
+                                            <button type="submit" class="btn btn-danger btn-block">
                                                 {{ __('Remove') }}
                                             </button>
                                         </form>
