@@ -23,8 +23,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// CRUD Scools
 Route::resource('schools', 'SchoolController');
 
+// CRUD Admins
 Route::resource('admins', 'AdminController');
 
+// CRUD Responsables
 Route::resource('responsables', 'ResponsableController');
+
+// CRUD Orden de Merito
+Route::resource('om', 'OMController');

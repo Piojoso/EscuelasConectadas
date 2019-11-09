@@ -12,7 +12,6 @@ class OrdenMerito extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
         'region',
         'nivel',
         'apellido',
