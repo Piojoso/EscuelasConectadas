@@ -84,6 +84,8 @@ class School extends Model
      * Obtener todos los docentes en la escuela.
      */
     public function teachers(){
-        return $this->belongsToMany('App\Teacher');
+        return $this->belongsToMany('App\Teacher')
+                    ->withPivot('id', 'division', 'hours', 'class', 'situacionRevista')
+                    ->withTimestamps();
     }
 }

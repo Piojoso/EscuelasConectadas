@@ -19,7 +19,7 @@ Route::get('/', function () {
     }
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -34,3 +34,7 @@ Route::resource('responsables', 'ResponsableController');
 
 // CRUD Orden de Merito
 Route::resource('om', 'OMController');
+
+Route::resource('teachers', 'TeacherController');
+
+Route::resource('pivots', 'PivotController');

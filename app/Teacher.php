@@ -12,7 +12,7 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
-        'cuil', 'firt_name', 'last_name', 'sex', 'degree', 'degree_category', 'locality_id'
+        'cuil', 'first_name', 'last_name', 'sex', 'degree', 'degree_category', 'locality_id'
     ];
 
     /**
@@ -26,6 +26,8 @@ class Teacher extends Model
      * Obtener todas las escuelas en las que trabaja el Docente.
      */
     public function schools(){
-        return $this->belongsToMany('App\School');
+        return $this->belongsToMany('App\School')
+                    ->withPivot('id', 'division', 'hours', 'class', 'situacionRevista')
+                    ->withTimestamps();
     }
 }
