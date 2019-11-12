@@ -13,7 +13,7 @@
                                 </ul>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a href="{{ route('responsable.create') }}" class="nav-link">
+                                        <a href="{{ route('responsables.create') }}" class="nav-link">
                                             {{ __('Add') }}
                                         </a>
                                     </li>
@@ -48,7 +48,7 @@
                                             <td>{{ $responsable->last_name }}</td>
                                             <td>{{ $responsable->email }}</td>
                                             <td>
-                                                <a href="{{ route('responsable.show', ['responsable' => $responsable->id]) }}">
+                                                <a href="{{ route('responsables.show', ['responsable' => $responsable->id]) }}">
                                                     <i class="fas fa-angle-double-right fa-lg"></i>
                                                 </a>
                                             </td>

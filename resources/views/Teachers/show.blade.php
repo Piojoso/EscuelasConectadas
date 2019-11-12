@@ -15,7 +15,7 @@
                                     @csrf
                                     @method('PUT')
 
-                                    <!-- Cuil - First Name - Last Name -->
+                                    <!-- Cuil - Sex -->
                                     <div class="row">
                                         <!-- Cuil -->
                                         <div class="form-group col-md-6 row">
