@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\School;
 use Illuminate\Http\Request;
+use Dotenv\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class SchoolController extends Controller
 {
@@ -35,12 +37,39 @@ class SchoolController extends Controller
      */
     public function store(Request $data)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'cue' => ['required', 'number', 'max:11'],'name' => $data['name'],
+            'avg_number_students' => ['required', 'number', 'max:11'],
+            'director' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'internal_phone' => ['required', 'number', 'max:11'],
+            'phone' => ['required', 'number', 'max:11'],
+            'orientation' => ['required', 'string', 'max:255'],
+            'type_id' => ['required', 'number', 'max:10'],
+            'sector_id' => ['required', 'number', 'max:10'],
+            'level_id' => ['required', 'number', 'max:10'],
+            'area_id' => ['required', 'number', 'max:10'],
+            'typeJourney_id' => ['required', 'number', 'max:10'],
+            'typeHighSchool_id' => ['required', 'number', 'max:10'],
+            'category_id' => ['required', 'number', 'max:10'],
+            'locality_id' => ['required', 'number', 'max:10'],
+            'responsable_id' => ['required', 'number', 'max:10'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return View('Schools/create')->withErrors($valid);
+        }
+
         foreach(School::all()as $school) {
             if( ($school->cue == $data['cue']) && ($school->level_id == $data['level']) ){
-                return "Esa escuela ya existe";
+                return View('Docentes.create')->withErrors("Esa escuela ya existe");
             }
             else if($school->email == $data['email']){
-                return "Ya existe otra escuela con ese correo.";
+                return View('Docentes.create')->withErrors("Ya existe otra escuela con ese correo.");
             }
         }
 
@@ -107,6 +136,33 @@ class SchoolController extends Controller
      */
     public function update(Request $data, School $school)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'cue' => ['required', 'number', 'max:11'],'name' => $data['name'],
+            'avg_number_students' => ['required', 'number', 'max:11'],
+            'director' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'internal_phone' => ['required', 'number', 'max:11'],
+            'phone' => ['required', 'number', 'max:11'],
+            'orientation' => ['required', 'string', 'max:255'],
+            'type_id' => ['required', 'number', 'max:10'],
+            'sector_id' => ['required', 'number', 'max:10'],
+            'level_id' => ['required', 'number', 'max:10'],
+            'area_id' => ['required', 'number', 'max:10'],
+            'typeJourney_id' => ['required', 'number', 'max:10'],
+            'typeHighSchool_id' => ['required', 'number', 'max:10'],
+            'category_id' => ['required', 'number', 'max:10'],
+            'locality_id' => ['required', 'number', 'max:10'],
+            'responsable_id' => ['required', 'number', 'max:10'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return view('Schools/show', ['school' => $school])->withErrors($valid);
+        }
+
         if($data['bilingual'] == null){
             $bilingual = false;
         }

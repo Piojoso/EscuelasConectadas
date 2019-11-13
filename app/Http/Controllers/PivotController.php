@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\School;
-use App\Teacher;
+use Dotenv\Validator;
+use Symfony\Component\Console\Input\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +73,22 @@ class PivotController extends Controller
      */
     public function update(Request $data, $id)
     {
+        $pivot = DB::select('select * from school_teacher where id = ?', [$id]);
+
+        $reglas = [
+            'id' => ['required', 'number', 'max:10'],
+            'division' => ['required', 'string', 'max:255'],
+            'hours' => ['required', 'number', 'max:11'],
+            'class' => ['required', 'string', 'max:255'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return view('Teachers/pivot', ['pivot' => $pivot[0]])->withErrors($valid);
+        }
+
         DB::update('update school_teacher set division = :division, hours = :hours, class = :class, situacionRevista = :situacionRevista where id = :id', [
             'id' => $id,
             'division' => $data['division'],

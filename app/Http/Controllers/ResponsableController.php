@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\School;
+use Dotenv\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class ResponsableController extends Controller
 {
@@ -37,6 +39,21 @@ class ResponsableController extends Controller
      */
     public function store(Request $data)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return View('Responsables/create')->withErrors($valid);
+        }
+
         User::create([
             'name' => $data['name'],
             'first_name' => $data['first_name'],
@@ -80,6 +97,20 @@ class ResponsableController extends Controller
      */
     public function update(Request $data, User $responsable)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return view('Responsables/show', ['responsable' => $responsable])->withErrors($valid);
+        }
+
         $responsable->update([
             'name' => $data['name'],
             'first_name' => $data['first_name'],

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Dotenv\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class AdminController extends Controller
 {
@@ -36,6 +38,22 @@ class AdminController extends Controller
      */
     public function store(Request $data)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return View('Admins/create')->withErrors($valid);
+        }
+
+
         User::create([
             'name' => $data['name'],
             'first_name' => $data['first_name'],
@@ -79,6 +97,20 @@ class AdminController extends Controller
      */
     public function update(Request $data, User $admin)
     {
+        $reglas = [
+            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+        ];
+
+        $valid = Validator::make(Input::all(), $reglas);
+
+        if ($valid->fails())
+        {
+            return View('Admins/show', ['admin' => $admin])->withErrors($valid);
+        }
+
         $admin->update([
             'name' => $data['name'],
             'first_name' => $data['first_name'],
