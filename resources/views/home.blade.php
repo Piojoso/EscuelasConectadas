@@ -117,7 +117,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ __('route in progress') }}">
+                                                            <a class="link text-center" href="{{ url('escuelaPorProvincia') }}">
                                                                 {{ __('Escuelas Por Provincias') }}
                                                             </a>
                                                         </div>
@@ -132,7 +132,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ route('responsables.index') }}">
+                                                            <a class="link text-center" href="{{ url('cantPersonasYCargos') }}">
                                                                 {{ __('Cantidad de Maestros y Promedios de cargos') }}
                                                             </a>
                                                         </div>
@@ -150,7 +150,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ __('route in progress') }}">
+                                                            <a class="link text-center" href="{{ url('cantPersonasYInscripciones') }}">
                                                                 {{ __('Cantidad de Personas y Promedio de Inscripciones ') }}
                                                             </a>
                                                         </div>
@@ -165,7 +165,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ route('responsables.index') }}">
+                                                            <a class="link text-center" href="{{ url('cantPersonasSinCargo') }}">
                                                                 {{ __('Cantidad de Personas inscriptas sin un cargo') }}
                                                             </a>
                                                         </div>
@@ -183,7 +183,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ __('route in progress') }}">
+                                                            <a class="link text-center" href="{{ url('cantEscuelasSinResponsable') }}">
                                                                 {{ __('Escuelas sin Representantes') }}
                                                             </a>
                                                         </div>
@@ -198,7 +198,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ route('responsables.index') }}">
+                                                            <a class="link text-center" href="{{ url('cantEscuelasRurales') }}">
                                                                 {{ __('Cantidad Escuelas Rurales') }}
                                                             </a>
                                                         </div>
@@ -213,7 +213,7 @@
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <a class="link text-center" href="{{ __('route in progress') }}">
+                                                            <a class="link text-center" href="{{ url('alumnosInforme') }}">
                                                                 {{ __('Promedio de alumnos') }}
                                                             </a>
                                                         </div>

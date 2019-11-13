@@ -12,7 +12,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10">
 
-                                <form action="{{ route('responsable.store') }}" method="POST">
+                                <form action="{{ route('responsables.store') }}" method="POST">
                                     @csrf
 
                                     <!-- Name -->
@@ -109,7 +109,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="{{ route('responsable.index') }}" class="btn btn-danger btn-block">
+                                            <a href="{{ route('responsables.index') }}" class="btn btn-danger btn-block">
                                                 {{ __('Cancel') }}
                                             </a>
                                         </div>

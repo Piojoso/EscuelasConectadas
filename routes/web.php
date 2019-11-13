@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\InformesController;
+
 Route::get('/', function () {
     if(Auth::check()){
         return view('home');
@@ -61,3 +63,24 @@ Route::resource('plantaDocente', 'PlantaDocenteController')->except('edit');
 
 //
 Route::resource('pivots', 'PivotController')->only(['show', 'update']);
+
+Route::get('escuelaPorProvincia', 'InformesController@escuelaPorProvincia');
+Route::post('escuelaPorProvincia', 'InformesController@escuelaPorProvinciaShow')->name('escuelaPorProvincia.show');
+
+Route::get('cantPersonasYCargos', 'InformesController@countPersonasYCargos');
+Route::post('cantPersonasYCargos', 'InformesController@countPersonasYCargosShow')->name('cantPersonasYCargos.show');
+
+Route::get('cantPersonasYInscripciones', 'InformesController@countPersonasYInscripciones');
+Route::post('cantPersonasYInscripciones', 'InformesController@countPersonasYInscripcionesShow')->name('cantPersonasYInscripciones.show');
+
+Route::get('cantPersonasSinCargo', 'InformesController@countPersonasSinCargo');
+Route::post('cantPersonasSinCargo', 'InformesController@countPersonasSinCargoShow')->name('cantPersonasSinCargo.show');
+
+Route::get('cantEscuelasSinResponsable', 'InformesController@countEscuelasSinResponsable');
+Route::post('cantEscuelasSinResponsable', 'InformesController@countEscuelasSinResponsableShow')->name('cantEscuelasSinResponsable.show');
+
+Route::get('cantEscuelasRurales', 'InformesController@countEscuelasRurales');
+Route::post('cantEscuelasRurales', 'InformesController@countEscuelasRuralesShow')->name('cantEscuelasRurales.show');
+
+Route::get('alumnosInforme', 'InformesController@alumnosInforme');
+Route::post('alumnosInforme', 'InformesController@alumnosInformeShow')->name('alumnosInforme.show');

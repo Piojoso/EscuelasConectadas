@@ -348,7 +348,7 @@
 
                                         <!-- typeHighSchool -->
                                         <div class="form-group col-md-4 row">
-                                            <label for="typeHighSchool" class="col-md-6 col-form-label text-md-right">{{ __('Type High School') }}</label>
+                                            <label for="typeHighSchool" class="col-md-6 col-form-label text-md-right">{{ __('Type School') }}</label>
 
                                             <div class="col-md-6">
                                                 <select id="typeHighSchool" class="form-control @error('typeHighSchool') is-invalid @enderror" name="typeHighSchool" required>
