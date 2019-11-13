@@ -106,6 +106,8 @@ class PlantaDocenteController extends Controller
             'class' => $data['class'],
             'situacionRevista' => $data['situacionRevista']
         ]);
+
+        return view('PlantaDocente.plantaDocente', ['school' => $school]);
     }
 
     /**
@@ -121,5 +123,84 @@ class PlantaDocenteController extends Controller
         $school = School::where('responsable_id', Auth::user()->id)->first();
 
         $teacher->schools()->detach($school);
+
+        return view('PlantaDocente.plantaDocente', ['school' => $school]);
+    }
+
+    /**
+     * Search by Teacher's last_name
+     */
+    public function search(Request $data)
+    {
+        $lista = [];
+        $enEscuela = false;
+        $teachers = Teacher::all();
+        foreach ($teachers as $teacher){
+            if(count($teacher->schools) != 0){
+                foreach($teacher->schools as $school){
+                    if($school->responsable_id == Auth::user()->id){
+                        $enEscuela = true;
+                    }
+                }
+                if($enEscuela == false){
+                    $lista[] = $teacher;
+                }
+            }else{
+                $lista[] = $teacher;
+            }
+        }
+
+        if($data['patron'] != null){
+
+            $teachers = [];
+
+            foreach ($lista as $teacher) {
+                if(strpos($teacher->last_name, $data['patron']) !== false)
+                {
+                    $teachers[] = $teacher;
+                }
+            }
+        }
+        else{
+            $teachers = $lista;
+        }
+
+        return view('PlantaDocente.add', ['teachers' => $teachers]);
+    }
+
+    /**
+     * Filtra por la Localidad del Teacher
+     */
+    public function filter(Request $data)
+    {
+
+        $lista = [];
+        $enEscuela = false;
+        $teachers = Teacher::all();
+        foreach ($teachers as $teacher){
+            if(count($teacher->schools) != 0){
+                foreach($teacher->schools as $school){
+                    if($school->responsable_id == Auth::user()->id){
+                        $enEscuela = true;
+                    }
+                }
+                if($enEscuela == false){
+                    $lista[] = $teacher;
+                }
+            }else{
+                $lista[] = $teacher;
+            }
+        }
+
+        $teachers = [];
+
+        foreach ($lista as $teacher) {
+            if($teacher->locality_id == $data['locality'])
+            {
+                $teachers[] = $teacher;
+            }
+        }
+
+        return view('PlantaDocente.add', ['teachers' => $teachers]);
     }
 }

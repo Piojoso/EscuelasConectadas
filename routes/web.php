@@ -84,3 +84,6 @@ Route::post('cantEscuelasRurales', 'InformesController@countEscuelasRuralesShow'
 
 Route::get('alumnosInforme', 'InformesController@alumnosInforme');
 Route::post('alumnosInforme', 'InformesController@alumnosInformeShow')->name('alumnosInforme.show');
+
+Route::post('search', 'PlantaDocenteController@search')->name('search');
+Route::post('filter', 'PlantaDocenteController@filter')->name('filter');

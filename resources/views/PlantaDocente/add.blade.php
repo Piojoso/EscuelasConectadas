@@ -11,6 +11,44 @@
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">{{ __('Teachers') }}</li>
                                 </ul>
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item row">
+
+                                        <!-- search -->
+                                        <form class="form-inline my-lg-0" action="{{ route('search') }}" method="POST">
+                                            @csrf
+                                            <input type="search" name ="patron" id="patron" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                                            <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
+                                        </form>
+
+                                        <!-- Filtro -->
+                                        <form action="{{ route('filter') }}" method="POST">
+                                            @csrf
+
+                                            <div class="form-group row mt-sm-1 mb-0 ml-1">
+
+                                                <div class="col-md-8">
+                                                    <select id="locality" class="form-control @error('locality') is-invalid @enderror" name="locality" required>
+                                                        @foreach (App\Locality::all() as $locality)
+                                                            <option value="{{ $locality->id }}">{{ $locality->name }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('locality')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <button type="submit" class="btn btn-outline-success">
+                                                    {{ __('Flitrar') }}
+                                                </button>
+
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
