@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class TeacherController extends Controller
 {
@@ -33,7 +34,6 @@ class TeacherController extends Controller
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -46,6 +46,8 @@ class TeacherController extends Controller
             'locality' => ['required', 'number']
         ]);
     }
+    */
+    /* NO WORK */
 
     /**
      * Store a newly created resource in storage.
@@ -55,6 +57,18 @@ class TeacherController extends Controller
      */
     public function store(Request $data)
     {
+        $valid = $data->validate([
+            'cuil' => ['required', 'unique:teachers', 'numeric'],
+            'first_name' => ['string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'sex' => ['required'],
+            'degree' => ['required', 'string', 'max:255'],
+            'degree_category' => ['required', 'string', 'max:255'],
+            'locality' => ['required', 'numeric']
+        ]);
+
+        dd($valid);
+
         $teacher = Teacher::create([
             'cuil' => $data['cuil'],
             'first_name' => $data['first_name'],
@@ -106,6 +120,18 @@ class TeacherController extends Controller
      */
     public function update(Request $data, Teacher $teacher)
     {
+        dd($data);
+        $validated = $data->validate([
+            'cuil' => ['required', 'unique:teachers', 'numeric'],
+            'first_name' => ['string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'sex' => ['required'],
+            'degree' => ['required', 'string', 'max:255'],
+            'degree_category' => ['required', 'string', 'max:255'],
+            'locality' => ['required', 'numeric']
+        ]);
+        dd('guarda');
+
         $teacher->update([
             'cuil' => $data['cuil'],
             'first_name' => $data['first_name'],

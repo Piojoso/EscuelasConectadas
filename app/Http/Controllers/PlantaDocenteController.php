@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\School;
 use App\Teacher;
-use Dotenv\Validator;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,13 +103,11 @@ class PlantaDocenteController extends Controller
 
         $pivot = $teacher->schools->where('id', '=', $school->id)->first()->pivot;
 
-        $reglas = [
+        $valid = $data->validate([
             'division' => ['required', 'string', 'max:255'],
-            'hours' => ['required', 'number', 'max:11'],
+            'hours' => ['required', 'numeric', 'max:11'],
             'class' => ['required', 'string', 'max:255'],
-        ];
-
-        $valid = Validator::make(Input::all(), $reglas);
+        ]);
 
         if ($valid->fails())
         {

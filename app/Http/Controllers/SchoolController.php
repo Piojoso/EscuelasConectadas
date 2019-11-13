@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\School;
 use Illuminate\Http\Request;
-use Dotenv\Validator;
 use Symfony\Component\Console\Input\Input;
 
 class SchoolController extends Controller
@@ -39,22 +38,22 @@ class SchoolController extends Controller
     {
         $reglas = [
             'name' => ['required', 'string', 'max:255'],
-            'cue' => ['required', 'number', 'max:11'],'name' => $data['name'],
-            'avg_number_students' => ['required', 'number', 'max:11'],
+            'cue' => ['required', 'numeric', 'max:11'],'name' => $data['name'],
+            'avg_number_students' => ['required', 'numeric', 'max:11'],
             'director' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'internal_phone' => ['required', 'number', 'max:11'],
-            'phone' => ['required', 'number', 'max:11'],
+            'internal_phone' => ['required', 'numeric', 'max:11'],
+            'phone' => ['required', 'numeric', 'max:11'],
             'orientation' => ['required', 'string', 'max:255'],
-            'type_id' => ['required', 'number', 'max:10'],
-            'sector_id' => ['required', 'number', 'max:10'],
-            'level_id' => ['required', 'number', 'max:10'],
-            'area_id' => ['required', 'number', 'max:10'],
-            'typeJourney_id' => ['required', 'number', 'max:10'],
-            'typeHighSchool_id' => ['required', 'number', 'max:10'],
-            'category_id' => ['required', 'number', 'max:10'],
-            'locality_id' => ['required', 'number', 'max:10'],
-            'responsable_id' => ['required', 'number', 'max:10'],
+            'type_id' => ['required', 'numeric', 'max:10'],
+            'sector_id' => ['required', 'numeric', 'max:10'],
+            'level_id' => ['required', 'numeric', 'max:10'],
+            'area_id' => ['required', 'numeric', 'max:10'],
+            'typeJourney_id' => ['required', 'numeric', 'max:10'],
+            'typeHighSchool_id' => ['required', 'numeric', 'max:10'],
+            'category_id' => ['required', 'numeric', 'max:10'],
+            'locality_id' => ['required', 'numeric', 'max:10'],
+            'responsable_id' => ['required', 'numeric', 'max:10'],
         ];
 
         $valid = Validator::make(Input::all(), $reglas);
@@ -138,22 +137,22 @@ class SchoolController extends Controller
     {
         $reglas = [
             'name' => ['required', 'string', 'max:255'],
-            'cue' => ['required', 'number', 'max:11'],'name' => $data['name'],
-            'avg_number_students' => ['required', 'number', 'max:11'],
+            'cue' => ['required', 'numeric', 'max:11'],'name' => $data['name'],
+            'avg_number_students' => ['required', 'numeric', 'max:11'],
             'director' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'internal_phone' => ['required', 'number', 'max:11'],
-            'phone' => ['required', 'number', 'max:11'],
+            'internal_phone' => ['required', 'numeric', 'max:11'],
+            'phone' => ['required', 'numeric', 'max:11'],
             'orientation' => ['required', 'string', 'max:255'],
-            'type_id' => ['required', 'number', 'max:10'],
-            'sector_id' => ['required', 'number', 'max:10'],
-            'level_id' => ['required', 'number', 'max:10'],
-            'area_id' => ['required', 'number', 'max:10'],
-            'typeJourney_id' => ['required', 'number', 'max:10'],
-            'typeHighSchool_id' => ['required', 'number', 'max:10'],
-            'category_id' => ['required', 'number', 'max:10'],
-            'locality_id' => ['required', 'number', 'max:10'],
-            'responsable_id' => ['required', 'number', 'max:10'],
+            'type_id' => ['required', 'numeric', 'max:10'],
+            'sector_id' => ['required', 'numeric', 'max:10'],
+            'level_id' => ['required', 'numeric', 'max:10'],
+            'area_id' => ['required', 'numeric', 'max:10'],
+            'typeJourney_id' => ['required', 'numeric', 'max:10'],
+            'typeHighSchool_id' => ['required', 'numeric', 'max:10'],
+            'category_id' => ['required', 'numeric', 'max:10'],
+            'locality_id' => ['required', 'numeric', 'max:10'],
+            'responsable_id' => ['required', 'numeric', 'max:10'],
         ];
 
         $valid = Validator::make(Input::all(), $reglas);

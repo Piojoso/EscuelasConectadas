@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Dotenv\Validator;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,14 +74,12 @@ class PivotController extends Controller
     {
         $pivot = DB::select('select * from school_teacher where id = ?', [$id]);
 
-        $reglas = [
-            'id' => ['required', 'number', 'max:10'],
+        $valid = $data->validate([
+            'id' => ['required', 'numeric', 'max:10'],
             'division' => ['required', 'string', 'max:255'],
-            'hours' => ['required', 'number', 'max:11'],
+            'hours' => ['required', 'numeric', 'max:11'],
             'class' => ['required', 'string', 'max:255'],
-        ];
-
-        $valid = Validator::make(Input::all(), $reglas);
+        ]);
 
         if ($valid->fails())
         {

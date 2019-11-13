@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\School;
-use Dotenv\Validator;
 use Symfony\Component\Console\Input\Input;
 
 class ResponsableController extends Controller
@@ -39,15 +38,13 @@ class ResponsableController extends Controller
      */
     public function store(Request $data)
     {
-        $reglas = [
+        $valid = $data->validate([
             'name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
-        ];
-
-        $valid = Validator::make(Input::all(), $reglas);
+        ]);
 
         if ($valid->fails())
         {
